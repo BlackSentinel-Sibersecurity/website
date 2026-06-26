@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Get in touch with BlackSentinel. We welcome collaboration, research partnerships, and business inquiries.",
-};
+import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const contactChannels = [
   {
@@ -54,79 +51,81 @@ const ContactIcon = ({ icon }: { icon: string }) => {
 
 export default function ContactPage() {
   return (
-    <div className="grid-bg">
-      {/* Hero */}
-      <section className="py-24 sm:py-32">
+    <div className="grid-bg relative">
+      <AnimatedBackground />
+
+      <section className="py-24 sm:py-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary animate-fade-in-up">
-              Get in <span className="text-primary">Touch</span>
-            </h1>
-            <p className="mt-6 text-lg text-text-secondary leading-relaxed animate-fade-in-up delay-100">
-              We welcome collaboration, research partnerships, and business inquiries.
-              Reach out to us through any of the channels below.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-3xl">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
+                Get in <span className="text-primary">Touch</span>
+              </h1>
+              <p className="mt-6 text-lg text-text-secondary leading-relaxed">
+                We welcome collaboration, research partnerships, and business inquiries.
+                Reach out to us through any of the channels below.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Contact Channels */}
-      <section className="py-16 border-t border-border-subtle bg-surface">
+      <section className="py-16 border-t border-border-subtle bg-surface relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
-            {contactChannels.map((channel) => (
-              <div
-                key={channel.label}
-                className="group rounded-xl border border-border bg-surface-elevated p-6 transition-all hover:border-primary/30"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                  <ContactIcon icon={channel.icon} />
+            {contactChannels.map((channel, i) => (
+              <AnimatedSection key={channel.label} delay={i * 100} direction="up">
+                <div className="group rounded-xl border border-border bg-surface-elevated p-6 card-hover hover:border-primary/30">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                    <ContactIcon icon={channel.icon} />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-text-primary">{channel.label}</h3>
+                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{channel.description}</p>
+                  {channel.email && (
+                    <a
+                      href={`mailto:${channel.email}`}
+                      className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:text-primary-dim transition-colors"
+                    >
+                      {channel.email}
+                      <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  )}
+                  {channel.url && (
+                    <a
+                      href={channel.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:text-primary-dim transition-colors"
+                    >
+                      View on GitHub
+                      <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  )}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-text-primary">{channel.label}</h3>
-                <p className="mt-2 text-sm text-text-muted leading-relaxed">{channel.description}</p>
-                {channel.email && (
-                  <a
-                    href={`mailto:${channel.email}`}
-                    className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:text-primary-dim transition-colors"
-                  >
-                    {channel.email}
-                    <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
-                )}
-                {channel.url && (
-                  <a
-                    href={channel.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:text-primary-dim transition-colors"
-                  >
-                    View on GitHub
-                    <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                )}
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Additional Info */}
-      <section className="py-16">
+      <section className="py-16 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-text-primary mb-4">
-              Let&apos;s Build the Future of Security Together
-            </h2>
-            <p className="text-text-secondary leading-relaxed">
-              Whether you&apos;re interested in our technology, want to collaborate on
-              research, or have a business inquiry, we&apos;d love to hear from you.
-              Our team is committed to responding promptly to all inquiries.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl font-bold text-text-primary mb-4">
+                Let&apos;s Build the Future of Security Together
+              </h2>
+              <p className="text-text-secondary leading-relaxed">
+                Whether you&apos;re interested in our technology, want to collaborate on
+                research, or have a business inquiry, we&apos;d love to hear from you.
+                Our team is committed to responding promptly to all inquiries.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>

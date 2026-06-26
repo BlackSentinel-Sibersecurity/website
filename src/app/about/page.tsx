@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about BlackSentinel's mission, vision, and core values. Building enterprise cybersecurity technologies that protect organizations worldwide.",
-};
+import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const coreValues = [
   {
@@ -58,8 +55,6 @@ const coreValues = [
     icon: "clock",
   },
 ];
-
-import React from "react";
 
 const ValueIcon = ({ icon }: { icon: string }) => {
   const icons: Record<string, React.JSX.Element> = {
@@ -120,95 +115,106 @@ const ValueIcon = ({ icon }: { icon: string }) => {
 
 export default function AboutPage() {
   return (
-    <div className="grid-bg">
+    <div className="grid-bg relative">
+      <AnimatedBackground />
+
       {/* Hero */}
-      <section className="py-24 sm:py-32">
+      <section className="py-24 sm:py-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary animate-fade-in-up">
-              About <span className="text-primary">BlackSentinel</span>
-            </h1>
-            <p className="mt-6 text-lg text-text-secondary leading-relaxed animate-fade-in-up delay-100">
-              We are a cybersecurity technology company dedicated to building intelligent
-              security platforms that protect organizations worldwide through automation,
-              artificial intelligence, and advanced security engineering.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-3xl">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
+                About <span className="text-primary">BlackSentinel</span>
+              </h1>
+              <p className="mt-6 text-lg text-text-secondary leading-relaxed">
+                We are a cybersecurity technology company dedicated to building intelligent
+                security platforms that protect organizations worldwide through automation,
+                artificial intelligence, and advanced security engineering.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 border-y border-border-subtle bg-surface">
+      <section className="py-16 border-y border-border-subtle bg-surface relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="rounded-2xl border border-border bg-surface-elevated p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+            <AnimatedSection direction="left">
+              <div className="rounded-2xl border border-border bg-surface-elevated p-8 card-hover">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-text-primary">Mission</h2>
                 </div>
-                <h2 className="text-2xl font-bold text-text-primary">Mission</h2>
+                <p className="text-text-secondary leading-relaxed">
+                  To engineer intelligent cybersecurity technologies that enable organizations
+                  to stay ahead of evolving cyber threats. We are committed to building autonomous
+                  and semi-autonomous security platforms that simplify cybersecurity operations,
+                  improve visibility, accelerate incident response, and reduce organizational risk.
+                </p>
+                <p className="mt-4 text-text-muted leading-relaxed">
+                  Our goal is to make enterprise-grade cybersecurity accessible, scalable,
+                  and driven by innovation.
+                </p>
               </div>
-              <p className="text-text-secondary leading-relaxed">
-                To engineer intelligent cybersecurity technologies that enable organizations
-                to stay ahead of evolving cyber threats. We are committed to building autonomous
-                and semi-autonomous security platforms that simplify cybersecurity operations,
-                improve visibility, accelerate incident response, and reduce organizational risk.
-              </p>
-              <p className="mt-4 text-text-muted leading-relaxed">
-                Our goal is to make enterprise-grade cybersecurity accessible, scalable,
-                and driven by innovation.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-surface-elevated p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
+            </AnimatedSection>
+
+            <AnimatedSection direction="right">
+              <div className="rounded-2xl border border-border bg-surface-elevated p-8 card-hover">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-text-primary">Vision</h2>
                 </div>
-                <h2 className="text-2xl font-bold text-text-primary">Vision</h2>
+                <p className="text-text-secondary leading-relaxed">
+                  To become one of the world&apos;s leading cybersecurity technology companies
+                  by creating an integrated ecosystem of security platforms that protect
+                  organizations through automation, artificial intelligence, and advanced
+                  security engineering.
+                </p>
+                <p className="mt-4 text-text-muted leading-relaxed">
+                  We envision a future where security teams spend less time reacting and
+                  more time preventing attacks through intelligent, autonomous systems.
+                </p>
               </div>
-              <p className="text-text-secondary leading-relaxed">
-                To become one of the world&apos;s leading cybersecurity technology companies
-                by creating an integrated ecosystem of security platforms that protect
-                organizations through automation, artificial intelligence, and advanced
-                security engineering.
-              </p>
-              <p className="mt-4 text-text-muted leading-relaxed">
-                We envision a future where security teams spend less time reacting and
-                more time preventing attacks through intelligent, autonomous systems.
-              </p>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-24 sm:py-32">
+      <section className="py-24 sm:py-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-              Core Values
-            </h2>
-            <p className="mt-4 text-text-secondary">
-              The principles that guide our work and define our culture.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-2xl mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+                Core Values
+              </h2>
+              <p className="mt-4 text-text-secondary">
+                The principles that guide our work and define our culture.
+              </p>
+            </div>
+          </AnimatedSection>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {coreValues.map((value) => (
-              <div
-                key={value.title}
-                className="group rounded-xl border border-border bg-surface-elevated p-6 transition-all hover:border-primary/30"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                  <ValueIcon icon={value.icon} />
+            {coreValues.map((value, i) => (
+              <AnimatedSection key={value.title} delay={i * 50} direction="up">
+                <div className="group rounded-xl border border-border bg-surface-elevated p-6 card-hover hover:border-primary/30">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                    <ValueIcon icon={value.icon} />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-text-primary">{value.title}</h3>
+                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{value.description}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-text-primary">{value.title}</h3>
-                <p className="mt-2 text-sm text-text-muted leading-relaxed">{value.description}</p>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

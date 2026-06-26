@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "Explore BlackSentinel's next-generation cybersecurity ecosystem. SIEM, SOAR, XDR, EDR, cloud security, AI agents, and more.",
-};
+import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const productCategories = [
   {
@@ -67,50 +64,49 @@ const statusColors: Record<string, string> = {
 
 export default function ProductsPage() {
   return (
-    <div className="grid-bg">
-      {/* Hero */}
-      <section className="py-24 sm:py-32">
+    <div className="grid-bg relative">
+      <AnimatedBackground />
+
+      <section className="py-24 sm:py-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary animate-fade-in-up">
-              Products & <span className="text-primary">Platform</span>
-            </h1>
-            <p className="mt-6 text-lg text-text-secondary leading-relaxed animate-fade-in-up delay-100">
-              BlackSentinel is building a next-generation cybersecurity ecosystem.
-              Our integrated platform covers the full spectrum of security operations.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-3xl">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
+                Products & <span className="text-primary">Platform</span>
+              </h1>
+              <p className="mt-6 text-lg text-text-secondary leading-relaxed">
+                BlackSentinel is building a next-generation cybersecurity ecosystem.
+                Our integrated platform covers the full spectrum of security operations.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-16 border-t border-border-subtle bg-surface">
+      <section className="py-16 border-t border-border-subtle bg-surface relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
-            {productCategories.map((category) => (
-              <div key={category.category}>
+            {productCategories.map((category, ci) => (
+              <AnimatedSection key={category.category} delay={ci * 100}>
                 <h2 className="text-2xl font-bold text-text-primary mb-6 pb-4 border-b border-border-subtle">
                   {category.category}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {category.products.map((product) => (
-                    <div
-                      key={product.name}
-                      className="group rounded-xl border border-border bg-surface-elevated p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-                    >
-                      <div className="flex items-start justify-between gap-2 mb-3">
-                        <h3 className="text-lg font-semibold text-text-primary">{product.name}</h3>
-                        <span
-                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColors[product.status]}`}
-                        >
-                          {product.status}
-                        </span>
+                  {category.products.map((product, pi) => (
+                    <AnimatedSection key={product.name} delay={pi * 50} direction="up">
+                      <div className="group rounded-xl border border-border bg-surface-elevated p-6 card-hover hover:border-primary/30">
+                        <div className="flex items-start justify-between gap-2 mb-3">
+                          <h3 className="text-lg font-semibold text-text-primary">{product.name}</h3>
+                          <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColors[product.status]}`}>
+                            {product.status}
+                          </span>
+                        </div>
+                        <p className="text-sm text-text-muted leading-relaxed">{product.description}</p>
                       </div>
-                      <p className="text-sm text-text-muted leading-relaxed">{product.description}</p>
-                    </div>
+                    </AnimatedSection>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
