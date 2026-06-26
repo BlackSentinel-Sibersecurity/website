@@ -1,9 +1,19 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Counter from "@/components/Counter";
+
+const NeuralCore = dynamic(() => import("@/components/three/NeuralCore"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+    </div>
+  ),
+});
 
 const stats = [
   { value: 20, suffix: "+", label: "Security Products" },
@@ -77,49 +87,57 @@ export default function Home() {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "5s" }} />
 
-        <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40 relative z-10">
-          <div className="max-w-xl">
-            <AnimatedSection delay={0}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary mb-8">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                Building the future of cybersecurity
-              </div>
-            </AnimatedSection>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left: Text Content */}
+            <div className="max-w-xl">
+              <AnimatedSection delay={0}>
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary mb-8">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  Building the future of cybersecurity
+                </div>
+              </AnimatedSection>
 
-            <AnimatedSection delay={200}>
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-text-primary">
-                Enterprise
-                <span className="block text-primary">Cybersecurity</span>
-                Technologies
-              </h1>
-            </AnimatedSection>
+              <AnimatedSection delay={200}>
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-text-primary">
+                  Enterprise
+                  <span className="block text-primary">Cybersecurity</span>
+                  Technologies
+                </h1>
+              </AnimatedSection>
 
-            <AnimatedSection delay={400}>
-              <p className="mt-6 text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
-                Engineering intelligent cybersecurity platforms that enable organizations
-                to stay ahead of evolving threats through automation, AI, and advanced security engineering.
-              </p>
-            </AnimatedSection>
+              <AnimatedSection delay={400}>
+                <p className="mt-6 text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
+                  Engineering intelligent cybersecurity platforms that enable organizations
+                  to stay ahead of evolving threats through automation, AI, and advanced security engineering.
+                </p>
+              </AnimatedSection>
 
-            <AnimatedSection delay={600}>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/products"
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-primary-dim hover:shadow-lg hover:shadow-primary/20 hover:scale-105"
-                >
-                  Explore Products
-                  <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-surface-elevated hover:border-primary/30 hover:scale-105"
-                >
-                  Learn More
-                </Link>
-              </div>
-            </AnimatedSection>
+              <AnimatedSection delay={600}>
+                <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-primary-dim hover:shadow-lg hover:shadow-primary/20 hover:scale-105"
+                  >
+                    Explore Products
+                    <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-surface-elevated hover:border-primary/30 hover:scale-105"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* Right: 3D Neural Core */}
+            <div className="relative h-[320px] sm:h-[420px] lg:h-[550px] xl:h-[600px]">
+              <NeuralCore />
+            </div>
           </div>
         </div>
       </section>
