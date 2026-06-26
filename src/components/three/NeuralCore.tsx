@@ -390,8 +390,6 @@ export default function NeuralCore() {
   const isDragging = useRef(false);
   const lastMouse = useRef({ x: 0, y: 0 });
   const velocity = useRef({ x: 0, y: 0 });
-  const reducedMotionRef = useRef(false);
-
   const particleData = useMemo(() => generateParticles(), []);
   const connectionData = useMemo(
     () => generateConnections(particleData.positions),
@@ -400,12 +398,10 @@ export default function NeuralCore() {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reducedMotionRef.current = mq.matches;
     if (mq.matches) {
       speedRef.current = 0.15;
     }
     const handler = (e: MediaQueryListEvent) => {
-      reducedMotionRef.current = e.matches;
       speedRef.current = e.matches ? 0.15 : 1;
     };
     mq.addEventListener("change", handler);
@@ -440,17 +436,16 @@ export default function NeuralCore() {
   }, []);
 
   const handleMouseEnter = useCallback(() => {
-    speedRef.current = reducedMotionRef.current ? 0.15 : 1.05;
+    speedRef.current = 1.05;
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     mouseRef.current.set(0, 0);
     isDragging.current = false;
-    speedRef.current = reducedMotionRef.current ? 0.15 : 1;
+    speedRef.current = 1;
   }, []);
 
   const handleClick = useCallback(() => {
-    if (reducedMotionRef.current) return;
     speedRef.current = 1.15;
     setTimeout(() => {
       speedRef.current = 1.05;

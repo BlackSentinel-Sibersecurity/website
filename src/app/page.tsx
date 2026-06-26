@@ -5,15 +5,44 @@ import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Counter from "@/components/Counter";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const NeuralCore = dynamic(() => import("@/components/three/NeuralCore"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+      <div className="relative">
+        <div className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full border border-primary/20 animate-spin" style={{ animationDuration: "20s" }} />
+        <div className="absolute inset-4 rounded-full border border-primary/10 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
+        <div className="absolute inset-8 rounded-full border border-primary/5 animate-spin" style={{ animationDuration: "10s" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-4 h-4 bg-primary/30 rounded-full animate-pulse" />
+        </div>
+      </div>
     </div>
   ),
 });
+
+function NeuralCoreFallback() {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="relative">
+        <div className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full border border-primary/20 animate-spin" style={{ animationDuration: "20s" }}>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary/50 rounded-full" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 bg-primary/30 rounded-full" />
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary/40 rounded-full" />
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-1 h-1 bg-primary/20 rounded-full" />
+        </div>
+        <div className="absolute inset-4 rounded-full border border-primary/10 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
+        <div className="absolute inset-8 rounded-full border border-primary/5 animate-spin" style={{ animationDuration: "10s" }} />
+        <div className="absolute inset-12 rounded-full bg-primary/5 blur-xl animate-pulse" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-3 h-3 bg-primary/40 rounded-full animate-pulse shadow-lg shadow-primary/20" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const stats = [
   { value: 20, suffix: "+", label: "Security Products" },
@@ -136,7 +165,9 @@ export default function Home() {
 
             {/* Right: 3D Neural Core */}
             <div className="relative h-[320px] sm:h-[420px] lg:h-[550px] xl:h-[600px]">
-              <NeuralCore />
+              <ErrorBoundary fallback={<NeuralCoreFallback />}>
+                <NeuralCore />
+              </ErrorBoundary>
             </div>
           </div>
         </div>
