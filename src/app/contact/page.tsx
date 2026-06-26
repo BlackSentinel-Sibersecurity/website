@@ -21,7 +21,7 @@ const contactChannels = [
   },
   {
     label: "GitHub",
-    url: "https://github.com/BlackSentinel-Tech",
+    url: "https://github.com/BlackSentinel-Cibersecurity",
     description: "Open-source projects, issues, and contributions.",
     icon: "github",
   },

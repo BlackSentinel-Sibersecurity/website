@@ -98,7 +98,7 @@ export default function OpenSourcePage() {
             </p>
             <div className="mt-8 animate-fade-in-up delay-200">
               <a
-                href="https://github.com/BlackSentinel-Tech"
+                href="https://github.com/BlackSentinel-Cibersecurity"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-text-primary transition-all hover:bg-surface-elevated hover:border-primary/30"

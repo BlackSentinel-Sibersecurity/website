@@ -14,7 +14,7 @@ const footerLinks = {
   ],
   community: [
     { href: "/open-source", label: "Open Source" },
-    { href: "https://github.com/BlackSentinel-Tech", label: "GitHub", external: true },
+    { href: "https://github.com/BlackSentinel-Cibersecurity", label: "GitHub", external: true },
   ],
 };
 

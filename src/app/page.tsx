@@ -216,7 +216,7 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/BlackSentinel-Tech"
+              href="https://github.com/BlackSentinel-Cibersecurity"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-surface-elevated hover:border-primary/30"

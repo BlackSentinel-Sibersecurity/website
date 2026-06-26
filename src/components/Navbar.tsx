@@ -57,7 +57,7 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="https://github.com/BlackSentinel-Tech"
+              href="https://github.com/BlackSentinel-Cibersecurity"
               target="_blank"
               rel="noopener noreferrer"
               className="text-text-secondary hover:text-text-primary transition-colors"
@@ -114,7 +114,7 @@ export default function Navbar() {
             ))}
             <div className="pt-4 border-t border-border-subtle">
               <a
-                href="https://github.com/BlackSentinel-Tech"
+                href="https://github.com/BlackSentinel-Cibersecurity"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-md px-3 py-2 text-base font-medium text-text-secondary hover:text-text-primary"
