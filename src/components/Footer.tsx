@@ -111,10 +111,10 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:business@blacksentinel.tech"
+              href="mailto:BlackSentinel-tech@protonmail.com"
               className="text-xs text-text-muted hover:text-primary transition-colors"
             >
-              business@blacksentinel.tech
+              BlackSentinel-tech@protonmail.com
             </a>
           </div>
         </div>

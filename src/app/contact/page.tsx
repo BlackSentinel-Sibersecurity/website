@@ -6,13 +6,13 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 const contactChannels = [
   {
     label: "Business Inquiries",
-    email: "business@blacksentinel.tech",
+    email: "BlackSentinel-tech@protonmail.com",
     description: "Partnerships, sales, and general business questions.",
     icon: "briefcase",
   },
   {
     label: "Research",
-    email: "research@blacksentinel.tech",
+    email: "BlackSentinel-tech@protonmail.com",
     description: "Research collaborations, vulnerability disclosures, and technical discussions.",
     icon: "research",
   },
