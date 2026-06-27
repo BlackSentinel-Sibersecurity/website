@@ -280,21 +280,25 @@ export default function NeuralCore() {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{ overflow: "visible" }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at center, rgba(255,106,0,0.06) 0%, transparent 60%)",
-        }}
-      />
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
+        gl={{ antialias: true, alpha: true, premultipliedAlpha: false }}
+        style={{
+          background: "transparent",
+          overflow: "visible",
+        }}
       >
         <Scene mouseRef={mouseRef} speedRef={speedRef} />
       </Canvas>
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, transparent 30%, #000000 70%)",
+        }}
+      />
     </div>
   );
 }
