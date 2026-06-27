@@ -280,7 +280,11 @@ export default function NeuralCore() {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ overflow: "visible" }}
+      style={{
+        overflow: "visible",
+        WebkitMaskImage: "radial-gradient(circle at center, black 30%, transparent 68%)",
+        maskImage: "radial-gradient(circle at center, black 30%, transparent 68%)",
+      }}
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
@@ -293,12 +297,6 @@ export default function NeuralCore() {
       >
         <Scene mouseRef={mouseRef} speedRef={speedRef} />
       </Canvas>
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at center, transparent 30%, #000000 70%)",
-        }}
-      />
     </div>
   );
 }
