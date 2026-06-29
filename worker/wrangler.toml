@@ -1,0 +1,20 @@
+name = "blacksentinel-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGINS = "https://blacksentinel.tech,https://website-73m.pages.dev"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_KV_PREVIEW_ID"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blacksentinel-db"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[secrets]
+CSRF_SECRET = "CHANGE_ME_TO_A_STRONG_SECRET_KEY"
