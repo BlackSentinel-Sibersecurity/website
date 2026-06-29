@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  poweredByHeader: false,
+  reactStrictMode: true,
+  compress: true,
 };
 
 export default nextConfig;

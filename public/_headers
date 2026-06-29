@@ -1,0 +1,42 @@
+/*
+  # Force HTTPS for all connections
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Prevent clickjacking
+  X-Frame-Options: DENY
+
+  # Control referrer information
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Control browser features
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), fullscreen=(self), sync-xhr=(), browsing-topics=()
+
+  # Prevent search engines from storing cached copies
+  X-Permitted-Cross-Domain-Policies: none
+
+  # Cross-Origin policies
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Content Security Policy - strict policy
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests
+
+  # Remove server identification headers
+  X-Powered-By: 
+
+  # Prevent page from being cached aggressively
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+  Pragma: no-cache
+  Expires: 0
+
+  # Additional protection
+  X-XSS-Protection: 1; mode=block
+  X-Download-Options: noopen
+  X-DNS-Prefetch-Control: off
+
+/*
+  X-Robots-Tag: noindex, nofollow, nosnippet, noarchive, notranslate, noimageindex
