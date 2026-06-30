@@ -2,59 +2,20 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const coreValues = [
-  {
-    title: "Security by Design",
-    description: "Every product and feature is built with security as the foundational principle, not an afterthought.",
-    icon: "shield",
-  },
-  {
-    title: "Innovation First",
-    description: "We push boundaries with cutting-edge AI, automation, and advanced engineering to stay ahead of threats.",
-    icon: "lightbulb",
-  },
-  {
-    title: "Transparency",
-    description: "Open communication, honest practices, and clear documentation guide everything we do.",
-    icon: "eye",
-  },
-  {
-    title: "Engineering Excellence",
-    description: "We maintain the highest standards in code quality, architecture, and product reliability.",
-    icon: "code",
-  },
-  {
-    title: "Continuous Learning",
-    description: "The threat landscape evolves constantly, and so do we. Learning is embedded in our culture.",
-    icon: "book",
-  },
-  {
-    title: "Customer Trust",
-    description: "Our customers trust us to protect their most critical assets. We earn that trust every day.",
-    icon: "handshake",
-  },
-  {
-    title: "Open Collaboration",
-    description: "We believe the security community grows stronger through shared knowledge and collaboration.",
-    icon: "users",
-  },
-  {
-    title: "Responsible Disclosure",
-    description: "We follow ethical practices in vulnerability research and disclosure to protect everyone.",
-    icon: "alert",
-  },
-  {
-    title: "Privacy by Default",
-    description: "Privacy is not optional. We design systems that protect user data from the ground up.",
-    icon: "lock",
-  },
-  {
-    title: "Long-Term Thinking",
-    description: "We build for the future, creating sustainable solutions that evolve with the threat landscape.",
-    icon: "clock",
-  },
-];
+const valueKeys = [
+  { key: "security", icon: "shield" },
+  { key: "innovation", icon: "lightbulb" },
+  { key: "transparency", icon: "eye" },
+  { key: "excellence", icon: "code" },
+  { key: "community", icon: "users" },
+  { key: "privacy", icon: "lock" },
+  { key: "resilience", icon: "shield" },
+  { key: "collaboration", icon: "handshake" },
+  { key: "impact", icon: "alert" },
+  { key: "integrity", icon: "book" },
+] as const;
 
 const ValueIcon = ({ icon }: { icon: string }) => {
   const icons: Record<string, React.JSX.Element> = {
@@ -114,6 +75,8 @@ const ValueIcon = ({ icon }: { icon: string }) => {
 };
 
 export default function AboutPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -124,12 +87,10 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                About <span className="text-primary">BlackSentinel</span>
+                {t.about.title} <span className="text-primary">{t.about.subtitle}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                We are a cybersecurity technology company dedicated to building intelligent
-                security platforms that protect organizations worldwide through automation,
-                artificial intelligence, and advanced security engineering.
+                {t.about.description}
               </p>
             </div>
           </AnimatedSection>
@@ -148,17 +109,10 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-bold text-text-primary">Mission</h2>
+                  <h2 className="text-2xl font-bold text-text-primary">{t.about.mission.title}</h2>
                 </div>
                 <p className="text-text-secondary leading-relaxed">
-                  To engineer intelligent cybersecurity technologies that enable organizations
-                  to stay ahead of evolving cyber threats. We are committed to building autonomous
-                  and semi-autonomous security platforms that simplify cybersecurity operations,
-                  improve visibility, accelerate incident response, and reduce organizational risk.
-                </p>
-                <p className="mt-4 text-text-muted leading-relaxed">
-                  Our goal is to make enterprise-grade cybersecurity accessible, scalable,
-                  and driven by innovation.
+                  {t.about.mission.description}
                 </p>
               </div>
             </AnimatedSection>
@@ -172,17 +126,10 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-bold text-text-primary">Vision</h2>
+                  <h2 className="text-2xl font-bold text-text-primary">{t.about.vision.title}</h2>
                 </div>
                 <p className="text-text-secondary leading-relaxed">
-                  To become one of the world&apos;s leading cybersecurity technology companies
-                  by creating an integrated ecosystem of security platforms that protect
-                  organizations through automation, artificial intelligence, and advanced
-                  security engineering.
-                </p>
-                <p className="mt-4 text-text-muted leading-relaxed">
-                  We envision a future where security teams spend less time reacting and
-                  more time preventing attacks through intelligent, autonomous systems.
+                  {t.about.vision.description}
                 </p>
               </div>
             </AnimatedSection>
@@ -196,7 +143,7 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="max-w-2xl mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-                Core Values
+                {t.about.coreValues}
               </h2>
               <p className="mt-4 text-text-secondary">
                 The principles that guide our work and define our culture.
@@ -205,14 +152,14 @@ export default function AboutPage() {
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {coreValues.map((value, i) => (
-              <AnimatedSection key={value.title} delay={i * 50} direction="up">
+            {valueKeys.map((value, i) => (
+              <AnimatedSection key={value.key} delay={i * 50} direction="up">
                 <div className="group rounded-xl border border-border bg-surface-elevated p-6 card-hover hover:border-primary/30">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
                     <ValueIcon icon={value.icon} />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-text-primary">{value.title}</h3>
-                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{value.description}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-text-primary">{t.about.values[value.key].title}</h3>
+                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{t.about.values[value.key].description}</p>
                 </div>
               </AnimatedSection>
             ))}

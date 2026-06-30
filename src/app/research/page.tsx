@@ -2,6 +2,7 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const researchAreas = [
   { name: "Threat Intelligence", description: "Tracking threat actors, campaigns, and TTPs to provide actionable intelligence for defenders.", icon: "target" },
@@ -43,6 +44,8 @@ const ResearchIcon = ({ icon }: { icon: string }) => {
 };
 
 export default function ResearchPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -52,13 +55,10 @@ export default function ResearchPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                <span className="text-primary">Research</span>
+                <span className="text-primary">{t.research.title}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                BlackSentinel Research focuses on advancing cybersecurity knowledge
-                through technical analysis and original research. Our objective is to
-                share practical knowledge that helps security professionals defend
-                modern environments.
+                {t.research.description}
               </p>
             </div>
           </AnimatedSection>

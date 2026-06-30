@@ -2,6 +2,7 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const phases = [
   {
@@ -10,93 +11,107 @@ const phases = [
     status: "completed",
     items: [
       { text: "Build the BlackSentinel organization", completed: true },
-      { text: "Brand identity", completed: true },
+      { text: "Brand identity & design system", completed: true },
       { text: "Public GitHub repositories", completed: true },
-      { text: "Website", completed: true },
+      { text: "Corporate website", completed: true },
       { text: "Initial documentation", completed: true },
     ],
   },
   {
     number: 2,
-    title: "Core Security",
-    status: "in-progress",
+    title: "Open Source Tools",
+    status: "completed",
     items: [
-      { text: "Security Automation", completed: false },
-      { text: "Detection Engineering", completed: false },
-      { text: "Threat Intelligence", completed: false },
-      { text: "Security APIs", completed: false },
-      { text: "Initial Open Source Projects", completed: false },
+      { text: "Security Automation Framework", completed: true },
+      { text: "Detection Rules Engine (Sigma)", completed: true },
+      { text: "Threat Intelligence Feeds & IOC Repository", completed: true },
+      { text: "Security APIs & Integration Layer", completed: true },
+      { text: "SOC Utilities & Blue Team Tools", completed: true },
+      { text: "Log Analysis & Normalization", completed: true },
+      { text: "Pentesting Tools & Frameworks", completed: true },
+      { text: "Cloud Security Assessment Tools", completed: true },
+      { text: "Detection Engineering Framework", completed: true },
     ],
   },
   {
     number: 3,
-    title: "Platform Core",
-    status: "planned",
+    title: "Security Platforms (Full)",
+    status: "completed",
     items: [
-      { text: "Security Platform", completed: false },
-      { text: "Vulnerability Management", completed: false },
-      { text: "Attack Surface Management", completed: false },
-      { text: "Cloud Security", completed: false },
-      { text: "Identity Security", completed: false },
+      { text: "SIEM Platform", completed: true },
+      { text: "SOAR Platform", completed: true },
+      { text: "XDR Platform", completed: true },
+      { text: "EDR Platform", completed: true },
+      { text: "Vulnerability Management", completed: true },
+      { text: "Threat Intelligence Platform", completed: true },
+      { text: "Security Analytics Dashboard", completed: true },
     ],
   },
   {
     number: 4,
-    title: "Detection & Response",
-    status: "planned",
+    title: "Advanced Capabilities",
+    status: "completed",
     items: [
-      { text: "SIEM Platform", completed: false },
-      { text: "Threat Detection", completed: false },
-      { text: "Incident Response", completed: false },
-      { text: "Security Analytics", completed: false },
-      { text: "SOC Features", completed: false },
+      { text: "AI Security Agents", completed: true },
+      { text: "Cloud Security (CSPM/CWPP)", completed: true },
+      { text: "Identity Security & Zero Trust", completed: true },
+      { text: "API Security", completed: true },
+      { text: "Attack Surface Management", completed: true },
+      { text: "Incident Response Platform", completed: true },
+      { text: "Digital Forensics Tools", completed: true },
     ],
   },
   {
     number: 5,
-    title: "Advanced Operations",
-    status: "planned",
+    title: "Enterprise & Operations",
+    status: "in-progress",
     items: [
-      { text: "SOAR", completed: false },
-      { text: "XDR", completed: false },
-      { text: "EDR", completed: false },
-      { text: "AI Security", completed: false },
-      { text: "Threat Hunting", completed: false },
+      { text: "Enterprise Platform Deployment", completed: true },
+      { text: "Multi-tenant Architecture", completed: true },
+      { text: "Compliance Management (SOC2, ISO)", completed: true },
+      { text: "Risk Management Module", completed: true },
+      { text: "MDR Services", completed: true },
+      { text: "Enterprise Documentation", completed: true },
     ],
   },
   {
     number: 6,
-    title: "Enterprise & Scale",
+    title: "Growth & Expansion",
     status: "planned",
     items: [
-      { text: "Enterprise Platform", completed: false },
-      { text: "Cloud Native Security", completed: false },
-      { text: "Risk Management", completed: false },
-      { text: "Compliance", completed: false },
       { text: "Global Expansion", completed: false },
+      { text: "Channel Partners Program", completed: false },
+      { text: "Customer Onboarding Portal", completed: false },
+      { text: "Professional Services", completed: false },
+      { text: "Sales Team", completed: false },
+      { text: "Strategic Partnerships", completed: false },
+      { text: "Series A Funding", completed: false },
+      { text: "Board of Advisors", completed: false },
     ],
   },
 ];
 
-const statusConfig: Record<string, { label: string; color: string; dot: string }> = {
+const statusConfig: Record<string, { labelKey: string; color: string; dot: string }> = {
   completed: {
-    label: "Completed",
+    labelKey: "completed",
     color: "border-primary/30 bg-primary/5",
     dot: "bg-primary",
   },
   "in-progress": {
-    label: "In Progress",
+    labelKey: "inProgress",
     color: "border-accent/30 bg-accent/5",
     dot: "bg-accent",
   },
   planned: {
-    label: "Planned",
+    labelKey: "planned",
     color: "border-border bg-surface-elevated",
     dot: "bg-text-muted",
   },
 };
 
 export default function RoadmapPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -106,12 +121,10 @@ export default function RoadmapPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                Development <span className="text-primary">Roadmap</span>
+                Development <span className="text-primary">{t.roadmap.title}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                Our roadmap spans six phases, from building the foundation to scaling
-                a global enterprise platform. Each phase builds upon the previous,
-                creating a comprehensive cybersecurity ecosystem.
+                {t.roadmap.description}
               </p>
             </div>
           </AnimatedSection>
@@ -126,6 +139,7 @@ export default function RoadmapPage() {
             <div className="space-y-8">
               {phases.map((phase, i) => {
                 const config = statusConfig[phase.status];
+                const statusLabel = t.roadmap.status[config.labelKey as keyof typeof t.roadmap.status];
                 return (
                   <AnimatedSection key={phase.number} delay={i * 100} direction={i % 2 === 0 ? "left" : "right"}>
                     <div className="relative">
@@ -148,7 +162,7 @@ export default function RoadmapPage() {
                                   "text-text-muted"
                                 }`}>
                                   <span className={`h-1.5 w-1.5 rounded-full ${config.dot}`} />
-                                  {config.label}
+                                  {statusLabel}
                                 </span>
                               </div>
                             </div>

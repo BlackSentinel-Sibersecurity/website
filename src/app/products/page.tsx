@@ -2,10 +2,11 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const productCategories = [
   {
-    category: "Security Platforms",
+    categoryKey: "securityPlatforms" as const,
     products: [
       { name: "SIEM Platform", description: "Next-generation security information and event management with real-time log analysis and AI-powered threat detection.", status: "planned" },
       { name: "SOAR Platform", description: "Security orchestration, automation, and response for streamlined incident management and playbook execution.", status: "planned" },
@@ -15,7 +16,7 @@ const productCategories = [
     ],
   },
   {
-    category: "Security Operations",
+    categoryKey: "securityOperations" as const,
     products: [
       { name: "Vulnerability Management", description: "Comprehensive vulnerability scanning, prioritization, and remediation tracking across your infrastructure.", status: "planned" },
       { name: "Attack Surface Management", description: "Continuous discovery and monitoring of your external attack surface to identify exposures.", status: "planned" },
@@ -25,7 +26,7 @@ const productCategories = [
     ],
   },
   {
-    category: "Cloud & Identity",
+    categoryKey: "cloudIdentity" as const,
     products: [
       { name: "Cloud Security", description: "Cloud-native security for AWS, Azure, and GCP with CSPM, CWPP, and CIEM capabilities.", status: "planned" },
       { name: "Identity Security", description: "Identity and access management with zero trust enforcement and privileged access management.", status: "planned" },
@@ -33,14 +34,14 @@ const productCategories = [
     ],
   },
   {
-    category: "AI & Automation",
+    categoryKey: "aiAutomation" as const,
     products: [
       { name: "AI Security Agents", description: "Autonomous security agents powered by AI for proactive threat hunting and response.", status: "planned" },
       { name: "Security Automation", description: "Workflow automation for repetitive security tasks with no-code playbook builder.", status: "planned" },
     ],
   },
   {
-    category: "Incident Response",
+    categoryKey: "incidentResponse" as const,
     products: [
       { name: "Incident Response Platform", description: "Structured incident response with case management, evidence collection, and reporting.", status: "planned" },
       { name: "Digital Forensics", description: "Forensic analysis tools for disk, memory, network, and cloud investigations.", status: "planned" },
@@ -48,13 +49,22 @@ const productCategories = [
     ],
   },
   {
-    category: "GRC",
+    categoryKey: "grc" as const,
     products: [
       { name: "Compliance Management", description: "Automated compliance monitoring and reporting for SOC 2, ISO 27001, NIST, and more.", status: "planned" },
       { name: "Risk Management", description: "Risk assessment, quantification, and tracking with integrated threat modeling.", status: "planned" },
     ],
   },
 ];
+
+const categoryLabels: Record<string, string> = {
+  securityPlatforms: "Security Platforms",
+  securityOperations: "Security Operations",
+  cloudIdentity: "Cloud & Identity",
+  aiAutomation: "AI & Automation",
+  incidentResponse: "Incident Response",
+  grc: "GRC",
+};
 
 const statusColors: Record<string, string> = {
   planned: "bg-warning/10 text-warning border-warning/20",
@@ -63,6 +73,8 @@ const statusColors: Record<string, string> = {
 };
 
 export default function ProductsPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -72,11 +84,10 @@ export default function ProductsPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                Products & <span className="text-primary">Platform</span>
+                {t.products.title} & <span className="text-primary">{t.products.subtitle.split(" ")[0]}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                BlackSentinel is building a next-generation cybersecurity ecosystem.
-                Our integrated platform covers the full spectrum of security operations.
+                {t.products.description}
               </p>
             </div>
           </AnimatedSection>
@@ -87,9 +98,9 @@ export default function ProductsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
             {productCategories.map((category, ci) => (
-              <AnimatedSection key={category.category} delay={ci * 100}>
+              <AnimatedSection key={category.categoryKey} delay={ci * 100}>
                 <h2 className="text-2xl font-bold text-text-primary mb-6 pb-4 border-b border-border-subtle">
-                  {category.category}
+                  {categoryLabels[category.categoryKey]}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {category.products.map((product, pi) => (
@@ -98,7 +109,7 @@ export default function ProductsPage() {
                         <div className="flex items-start justify-between gap-2 mb-3">
                           <h3 className="text-lg font-semibold text-text-primary">{product.name}</h3>
                           <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColors[product.status]}`}>
-                            {product.status}
+                            {t.products.status[product.status as keyof typeof t.products.status]}
                           </span>
                         </div>
                         <p className="text-sm text-text-muted leading-relaxed">{product.description}</p>

@@ -6,6 +6,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Counter from "@/components/Counter";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const NeuralCore = dynamic(() => import("@/components/three/NeuralCore"), {
   ssr: false,
@@ -44,36 +45,6 @@ function NeuralCoreFallback() {
   );
 }
 
-const stats = [
-  { value: 20, suffix: "+", label: "Security Products" },
-  { value: 15, suffix: "", label: "Research Areas" },
-  { value: 10, suffix: "+", label: "Open Source Projects" },
-  { value: 6, suffix: "", label: "Development Phases" },
-];
-
-const featuredProducts = [
-  {
-    name: "SIEM Platform",
-    description: "Next-generation security information and event management with AI-powered threat detection.",
-    icon: "grid",
-  },
-  {
-    name: "XDR",
-    description: "Extended detection and response across endpoints, networks, and cloud environments.",
-    icon: "shield",
-  },
-  {
-    name: "AI Security Agents",
-    description: "Autonomous security agents powered by artificial intelligence for proactive threat hunting.",
-    icon: "cpu",
-  },
-  {
-    name: "Cloud Security",
-    description: "Comprehensive cloud-native security for multi-cloud and hybrid environments.",
-    icon: "cloud",
-  },
-];
-
 const IconSvg = ({ icon }: { icon: string }) => {
   switch (icon) {
     case "grid":
@@ -106,6 +77,38 @@ const IconSvg = ({ icon }: { icon: string }) => {
 };
 
 export default function Home() {
+  const { t } = useLanguage();
+
+  const stats = [
+    { value: 20, suffix: "+", label: t.stats.threatIntel },
+    { value: 15, suffix: "", label: t.stats.responseTime },
+    { value: 10, suffix: "+", label: t.stats.uptime },
+    { value: 6, suffix: "", label: t.stats.attacks },
+  ];
+
+  const featuredProducts = [
+    {
+      name: "SIEM Platform",
+      description: "Next-generation security information and event management with AI-powered threat detection.",
+      icon: "grid",
+    },
+    {
+      name: "XDR",
+      description: "Extended detection and response across endpoints, networks, and cloud environments.",
+      icon: "shield",
+    },
+    {
+      name: "AI Security Agents",
+      description: "Autonomous security agents powered by artificial intelligence for proactive threat hunting.",
+      icon: "cpu",
+    },
+    {
+      name: "Cloud Security",
+      description: "Comprehensive cloud-native security for multi-cloud and hybrid environments.",
+      icon: "cloud",
+    },
+  ];
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -123,22 +126,21 @@ export default function Home() {
               <AnimatedSection delay={0}>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary mb-8">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                  Building the future of cybersecurity
+                  {t.hero.badge}
                 </div>
               </AnimatedSection>
 
               <AnimatedSection delay={200}>
                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-text-primary">
-                  Enterprise
-                  <span className="block text-primary">Cybersecurity</span>
-                  Technologies
+                  {t.hero.title1}
+                  <span className="block text-primary">{t.hero.title2}</span>
+                  {t.hero.title3}
                 </h1>
               </AnimatedSection>
 
               <AnimatedSection delay={400}>
                 <p className="mt-6 text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
-                  Engineering intelligent cybersecurity platforms that enable organizations
-                  to stay ahead of evolving threats through automation, AI, and advanced security engineering.
+                  {t.hero.description}
                 </p>
               </AnimatedSection>
 
@@ -148,7 +150,7 @@ export default function Home() {
                     href="/products"
                     className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-primary-dim hover:shadow-lg hover:shadow-primary/20 hover:scale-105"
                   >
-                    Explore Products
+                    {t.hero.exploreProducts}
                     <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -157,7 +159,7 @@ export default function Home() {
                     href="/about"
                     className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-surface-elevated hover:border-primary/30 hover:scale-105"
                   >
-                    Learn More
+                    {t.hero.learnMore}
                   </Link>
                 </div>
               </AnimatedSection>
@@ -198,13 +200,10 @@ export default function Home() {
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-                Our Mission
+                {t.mission.label}
               </h2>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                To engineer intelligent cybersecurity technologies that enable organizations
-                to stay ahead of evolving cyber threats. We build autonomous and semi-autonomous
-                security platforms that simplify cybersecurity operations, improve visibility,
-                accelerate incident response, and reduce organizational risk.
+                {t.mission.description}
               </p>
             </div>
           </AnimatedSection>
@@ -218,17 +217,14 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
               <div>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-                  Security Platform
+                  {t.featuredProducts.title}
                 </h2>
-                <p className="mt-2 text-text-secondary">
-                  A next-generation cybersecurity ecosystem built for the modern enterprise.
-                </p>
               </div>
               <Link
                 href="/products"
                 className="text-sm font-medium text-primary hover:text-primary-dim transition-colors inline-flex items-center gap-1"
               >
-                View all products
+                {t.featuredProducts.viewAll}
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -259,16 +255,10 @@ export default function Home() {
             <AnimatedSection direction="left">
               <div>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-                  Our Vision
+                  {t.vision.label}
                 </h2>
                 <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                  To become one of the world&apos;s leading cybersecurity technology companies by
-                  creating an integrated ecosystem of security platforms that protect organizations
-                  through automation, artificial intelligence, and advanced security engineering.
-                </p>
-                <p className="mt-4 text-text-muted leading-relaxed">
-                  We envision a future where security teams spend less time reacting and more time
-                  preventing attacks through intelligent, autonomous systems.
+                  {t.vision.description}
                 </p>
               </div>
             </AnimatedSection>
@@ -296,11 +286,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-              Ready to secure your organization?
+              {t.cta.title}
             </h2>
             <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
-              Join us in building the future of cybersecurity. Explore our open-source projects
-              or get in touch to learn more about our enterprise solutions.
+              {t.cta.description}
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -312,13 +301,13 @@ export default function Home() {
                 <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
-                View on GitHub
+                {t.nav.github}
               </a>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-primary-dim hover:shadow-lg hover:shadow-primary/20 hover:scale-105"
               >
-                Contact Us
+                {t.nav.getInTouch}
               </Link>
             </div>
           </AnimatedSection>

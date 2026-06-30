@@ -4,21 +4,24 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/products", label: "Products" },
-  { href: "/research", label: "Research" },
-  { href: "/projects", label: "Projects" },
-  { href: "/open-source", label: "Open Source" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/about", label: t.nav.about },
+    { href: "/products", label: t.nav.products },
+    { href: "/research", label: t.nav.research },
+    { href: "/projects", label: t.nav.projects },
+    { href: "/open-source", label: t.nav.openSource },
+    { href: "/roadmap", label: t.nav.roadmap },
+    { href: "/contact", label: t.nav.contact },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border-subtle bg-background/80 backdrop-blur-xl">
@@ -56,6 +59,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher />
             <a
               href="https://github.com/BlackSentinel-Cibersecurity"
               target="_blank"
@@ -71,27 +75,30 @@ export default function Navbar() {
               href="/contact"
               className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-primary-dim"
             >
-              Get in Touch
+              {t.nav.getInTouch}
             </Link>
           </div>
 
-          <button
-            type="button"
-            className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-text-secondary hover:text-text-primary hover:bg-surface-elevated"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md p-2 text-text-secondary hover:text-text-primary hover:bg-surface-elevated"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -119,14 +126,14 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="block rounded-md px-3 py-2 text-base font-medium text-text-secondary hover:text-text-primary"
               >
-                GitHub
+                {t.nav.github}
               </a>
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}
                 className="block rounded-md bg-primary px-3 py-2 text-center text-base font-medium text-background"
               >
-                Get in Touch
+                {t.nav.getInTouch}
               </Link>
             </div>
           </div>

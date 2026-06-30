@@ -1,24 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-const footerLinks = {
-  company: [
-    { href: "/about", label: "About" },
-    { href: "/roadmap", label: "Roadmap" },
-    { href: "/contact", label: "Contact" },
-  ],
-  technology: [
-    { href: "/products", label: "Products" },
-    { href: "/research", label: "Research" },
-    { href: "/projects", label: "Projects" },
-  ],
-  community: [
-    { href: "/open-source", label: "Open Source" },
-    { href: "https://github.com/BlackSentinel-Cibersecurity", label: "GitHub", external: true },
-  ],
-};
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = {
+    company: [
+      { href: "/about", label: t.nav.about },
+      { href: "/roadmap", label: t.nav.roadmap },
+      { href: "/contact", label: t.nav.contact },
+    ],
+    technology: [
+      { href: "/products", label: t.nav.products },
+      { href: "/research", label: t.nav.research },
+      { href: "/projects", label: t.nav.projects },
+    ],
+    community: [
+      { href: "/open-source", label: t.nav.openSource },
+      { href: "https://github.com/BlackSentinel-Cibersecurity", label: "GitHub", external: true },
+    ],
+  };
+
   return (
     <footer className="border-t border-border-subtle bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -38,12 +43,12 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-text-muted leading-relaxed">
-              Building enterprise cybersecurity technologies that protect organizations through automation, AI, and advanced security engineering.
+              {t.footer.description}
             </p>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">Company</h3>
+            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">{t.footer.company}</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -59,7 +64,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">Technology</h3>
+            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">{t.footer.products}</h3>
             <ul className="space-y-2">
               {footerLinks.technology.map((link) => (
                 <li key={link.href}>
@@ -75,7 +80,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">Community</h3>
+            <h3 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">{t.footer.connect}</h3>
             <ul className="space-y-2">
               {footerLinks.community.map((link) => (
                 <li key={link.href}>
@@ -107,7 +112,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-text-muted">
-            &copy; {new Date().getFullYear()} BlackSentinel. All rights reserved.
+            &copy; {new Date().getFullYear()} BlackSentinel. {t.footer.allRightsReserved}
           </p>
           <div className="flex items-center gap-4">
             <a

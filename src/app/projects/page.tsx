@@ -2,6 +2,7 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const projects = [
   { name: "Enterprise Security Platforms", description: "Building comprehensive security platforms that integrate SIEM, SOAR, XDR, and EDR capabilities into a unified ecosystem.", tags: ["Platform", "Enterprise", "Integration"], status: "active" },
@@ -24,6 +25,8 @@ const statusColors: Record<string, string> = {
 };
 
 export default function ProjectsPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid-bg relative">
       <AnimatedBackground />
@@ -33,12 +36,10 @@ export default function ProjectsPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                <span className="text-primary">Projects</span>
+                <span className="text-primary">{t.projects.title}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-                This organization hosts the technologies being developed by BlackSentinel.
-                Projects range from production-ready software to experimental research
-                initiatives.
+                {t.projects.description}
               </p>
             </div>
           </AnimatedSection>
@@ -54,7 +55,7 @@ export default function ProjectsPage() {
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <h3 className="text-lg font-semibold text-text-primary">{project.name}</h3>
                     <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColors[project.status]}`}>
-                      {project.status}
+                      {t.projects.status[project.status as keyof typeof t.projects.status]}
                     </span>
                   </div>
                   <p className="text-sm text-text-muted leading-relaxed mb-4">{project.description}</p>
