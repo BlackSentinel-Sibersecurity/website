@@ -19,14 +19,16 @@ interface ContactFormData {
 }
 
 const ALLOWED_PRODUCTS = [
-  "sentinel-siem",
-  "sentinel-soar",
-  "sentinel-xdr",
-  "sentinel-edr",
-  "sentinel-cti",
-  "sentinel-vuln",
-  "sentinel-cloud",
-  "sentinel-automate",
+  "nexus",
+  "sentinel",
+  "strike",
+  "pulse",
+  "guardian",
+  "vault",
+  "vision",
+  "forge",
+  "command",
+  "ai",
   "custom",
   "other",
 ];

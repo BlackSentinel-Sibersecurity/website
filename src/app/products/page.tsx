@@ -6,70 +6,54 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const productCategories = [
   {
-    categoryKey: "securityPlatforms" as const,
+    categoryKey: "platform" as const,
     products: [
-      { name: "SIEM Platform", description: "Next-generation security information and event management with real-time log analysis and AI-powered threat detection.", status: "planned" },
-      { name: "SOAR Platform", description: "Security orchestration, automation, and response for streamlined incident management and playbook execution.", status: "planned" },
-      { name: "XDR", description: "Extended detection and response across endpoints, networks, cloud, and identity for unified threat detection.", status: "planned" },
-      { name: "EDR", description: "Endpoint detection and response with real-time monitoring, threat hunting, and automated remediation.", status: "planned" },
-      { name: "MDR", description: "Managed detection and response services combining technology with expert security operations.", status: "planned" },
+      { name: "BlackSentinel Nexus", subtitle: "Next Generation Autonomous SIEM", description: "Autonomous security information and event management with real-time log analysis, AI-powered threat detection, and automated response capabilities.", status: "available" },
+      { name: "BlackSentinel Sentinel", subtitle: "Autonomous Digital Sovereignty Platform", description: "Complete digital sovereignty platform ensuring data protection, compliance, and autonomous security operations across your infrastructure.", status: "available" },
+      { name: "BlackSentinel Command", subtitle: "Unified Management Console", description: "Centralized management console providing unified visibility and control across all BlackSentinel security modules.", status: "available" },
     ],
   },
   {
-    categoryKey: "securityOperations" as const,
+    categoryKey: "defense" as const,
     products: [
-      { name: "Vulnerability Management", description: "Comprehensive vulnerability scanning, prioritization, and remediation tracking across your infrastructure.", status: "planned" },
-      { name: "Attack Surface Management", description: "Continuous discovery and monitoring of your external attack surface to identify exposures.", status: "planned" },
-      { name: "Threat Intelligence Platform", description: "Aggregated threat intelligence feeds with IOC enrichment and automated correlation.", status: "planned" },
-      { name: "Security Analytics", description: "Advanced analytics and reporting for security posture management and compliance.", status: "planned" },
-      { name: "Security Monitoring", description: "24/7 security monitoring with real-time alerting and escalation workflows.", status: "planned" },
+      { name: "BlackSentinel Guardian", subtitle: "Endpoint Protection", description: "Advanced endpoint detection and response with real-time monitoring, threat hunting, and automated remediation.", status: "available" },
+      { name: "BlackSentinel Vision", subtitle: "Threat Intelligence", description: "Comprehensive threat intelligence platform with IOC enrichment, automated correlation, and predictive analytics.", status: "available" },
+      { name: "BlackSentinel Forge", subtitle: "Security Automation", description: "Workflow automation for security operations with no-code playbook builder and incident response orchestration.", status: "available" },
     ],
   },
   {
-    categoryKey: "cloudIdentity" as const,
+    categoryKey: "offensive" as const,
     products: [
-      { name: "Cloud Security", description: "Cloud-native security for AWS, Azure, and GCP with CSPM, CWPP, and CIEM capabilities.", status: "planned" },
-      { name: "Identity Security", description: "Identity and access management with zero trust enforcement and privileged access management.", status: "planned" },
-      { name: "API Security", description: "API discovery, vulnerability detection, and runtime protection for modern applications.", status: "planned" },
+      { name: "BlackSentinel Strike", subtitle: "Offensive Security Platform", description: "Penetration testing and red team platform with automated scanning, vulnerability exploitation, and reporting.", status: "available" },
+      { name: "BlackSentinel Pulse", subtitle: "Attack Surface Management", description: "Continuous discovery and monitoring of your external attack surface to identify exposures and vulnerabilities.", status: "available" },
     ],
   },
   {
-    categoryKey: "aiAutomation" as const,
+    categoryKey: "access" as const,
     products: [
-      { name: "AI Security Agents", description: "Autonomous security agents powered by AI for proactive threat hunting and response.", status: "planned" },
-      { name: "Security Automation", description: "Workflow automation for repetitive security tasks with no-code playbook builder.", status: "planned" },
+      { name: "BlackSentinel Vault", subtitle: "Secrets & Privileged Access", description: "Secrets management and privileged access management with zero trust enforcement and audit logging.", status: "available" },
     ],
   },
   {
-    categoryKey: "incidentResponse" as const,
+    categoryKey: "ai" as const,
     products: [
-      { name: "Incident Response Platform", description: "Structured incident response with case management, evidence collection, and reporting.", status: "planned" },
-      { name: "Digital Forensics", description: "Forensic analysis tools for disk, memory, network, and cloud investigations.", status: "planned" },
-      { name: "Pentesting Platform", description: "Penetration testing management with automated scanning and manual testing workflows.", status: "planned" },
-    ],
-  },
-  {
-    categoryKey: "grc" as const,
-    products: [
-      { name: "Compliance Management", description: "Automated compliance monitoring and reporting for SOC 2, ISO 27001, NIST, and more.", status: "planned" },
-      { name: "Risk Management", description: "Risk assessment, quantification, and tracking with integrated threat modeling.", status: "planned" },
+      { name: "BlackSentinel AI", subtitle: "AI Security Engine", description: "AI-powered security engine providing autonomous threat detection, behavioral analytics, and predictive defense.", status: "available" },
     ],
   },
 ];
 
 const categoryLabels: Record<string, string> = {
-  securityPlatforms: "Security Platforms",
-  securityOperations: "Security Operations",
-  cloudIdentity: "Cloud & Identity",
-  aiAutomation: "AI & Automation",
-  incidentResponse: "Incident Response",
-  grc: "GRC",
+  platform: "BlackSentinel Platform",
+  defense: "Defense & Intelligence",
+  offensive: "Offensive Security",
+  access: "Access & Secrets",
+  ai: "Artificial Intelligence",
 };
 
 const statusColors: Record<string, string> = {
-  planned: "bg-warning/10 text-warning border-warning/20",
-  development: "bg-accent/10 text-accent border-accent/20",
   available: "bg-primary/10 text-primary border-primary/20",
+  development: "bg-accent/10 text-accent border-accent/20",
+  planned: "bg-warning/10 text-warning border-warning/20",
 };
 
 export default function ProductsPage() {
@@ -84,7 +68,7 @@ export default function ProductsPage() {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-text-primary">
-                {t.products.title} & <span className="text-primary">{t.products.subtitle.split(" ")[0]}</span>
+                BlackSentinel <span className="text-primary">{t.products.title}</span>
               </h1>
               <p className="mt-6 text-lg text-text-secondary leading-relaxed">
                 {t.products.description}
@@ -107,7 +91,10 @@ export default function ProductsPage() {
                     <AnimatedSection key={product.name} delay={pi * 50} direction="up">
                       <div className="group rounded-xl border border-border bg-surface-elevated p-6 card-hover hover:border-primary/30">
                         <div className="flex items-start justify-between gap-2 mb-3">
-                          <h3 className="text-lg font-semibold text-text-primary">{product.name}</h3>
+                          <div>
+                            <h3 className="text-lg font-semibold text-text-primary">{product.name}</h3>
+                            <p className="text-xs text-primary font-medium mt-0.5">{product.subtitle}</p>
+                          </div>
                           <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColors[product.status]}`}>
                             {t.products.status[product.status as keyof typeof t.products.status]}
                           </span>

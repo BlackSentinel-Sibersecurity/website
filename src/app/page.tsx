@@ -88,23 +88,23 @@ export default function Home() {
 
   const featuredProducts = [
     {
-      name: "SIEM Platform",
-      description: "Next-generation security information and event management with AI-powered threat detection.",
+      name: "BlackSentinel Nexus",
+      description: "Next Generation Autonomous SIEM with real-time log analysis and AI-powered threat detection.",
       icon: "grid",
     },
     {
-      name: "XDR",
-      description: "Extended detection and response across endpoints, networks, and cloud environments.",
+      name: "BlackSentinel Guardian",
+      description: "Advanced endpoint protection with real-time monitoring, threat hunting, and automated remediation.",
       icon: "shield",
     },
     {
-      name: "AI Security Agents",
-      description: "Autonomous security agents powered by artificial intelligence for proactive threat hunting.",
+      name: "BlackSentinel AI",
+      description: "AI-powered security engine providing autonomous threat detection and predictive defense.",
       icon: "cpu",
     },
     {
-      name: "Cloud Security",
-      description: "Comprehensive cloud-native security for multi-cloud and hybrid environments.",
+      name: "BlackSentinel Forge",
+      description: "Security automation platform with no-code playbook builder and incident response orchestration.",
       icon: "cloud",
     },
   ];
